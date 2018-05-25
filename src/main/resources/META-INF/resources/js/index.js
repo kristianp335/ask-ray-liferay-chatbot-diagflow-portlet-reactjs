@@ -17,7 +17,7 @@ class AiApiConversation extends React.Component {
 	  Liferay.Service(
 		  '/apiai.apiaidata/get-recent-conversation',
 		  {
-			  records: 5
+			  records: 6
 		  },
 		  function(obj) {
 			  console.log(obj);

@@ -1,19 +1,19 @@
 .conversation-query {
-	background-color: #e9c70b; 
+	background-color: #4bb2ee; 
 	color: #fff; 
 	border-radius: 10px; 
 	max-width: 250px; padding: 10px; 
-	border: solid 1px #e4cc05; 
+	border: solid 1px #1bd096; 
 	margin-bottom: 10px; 
 	margin-left: 15px;
 }
 
 .conversation-response {
-	background-color: #000000; 
+	background-color: #1bd096; 
 	color: #fff; 
 	border-radius: 10px; 
 	max-width: 250px; padding: 10px; 
-	border: solid 1px #e4cc05; 
+	border: solid 1px #0ea877; 
 	margin-bottom: 10px; 
 	margin-left: 25px;
 }
