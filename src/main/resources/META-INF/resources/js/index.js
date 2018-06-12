@@ -1,17 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Bar} from 'react-chartjs-2';
 
 class AiApiConversation extends React.Component {
 	constructor(props) {
-		  super(props);						
-		  this.state = ({apiAiDataObject: [], value: "", isItVoice: false, link: ""});	  
-		  this.handleChange = this.handleChange.bind(this);
-		  this.handleSubmit = this.handleSubmit.bind(this);
-		  this.recordVoice = this.recordVoice.bind(this);
-		  this.getLink = this.getLink.bind(this);
-		  this.renderButton = this.renderButton.bind(this);
-		  this.getApiAiData(); 
- }
+		super(props);						
+		this.state = ({apiAiDataObject: [], value: "", isItVoice: false, link: "", Data: {}});	  
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.recordVoice = this.recordVoice.bind(this);
+		this.getLink = this.getLink.bind(this);
+		this.renderButton = this.renderButton.bind(this);
+		this.getApiAiData(); 
+		let conversationType = ["Query", "Response"];
+		let conversationValue = [];
+		let conversationValueQuery = 0;
+		let conversationValueResponse = 0;
+		
+		this.state.apiAiDataObject.forEach(element => {
+			if (element.type = "query") {
+				conversationValueQuery = converationValueQuery + 1;
+			
+			}
+			else
+			{
+				conversationValueResponse = conversationValueResponse + 1;
+			}
+		});
+		this.setState({ 
+			Data: {
+			labels: conversationType,
+			datasets:[
+				{
+					label:'Query vs Response Count',
+					data: conversationValue ,
+					backgroundColor:[
+					'rgba(255,105,145,0.6)',
+					'rgba(155,100,210,0.6)'                      
+				]
+				}
+			]
+			}
+		});
+         
+	}
   
   getApiAiData() {
 	  Liferay.Service(
@@ -137,6 +169,8 @@ render() {
 										
 				</p>
 			</div>
+			<BarChartComponent data={this.state.Data}
+          options={{maintainAspectRatio: false}}/>
 		</div>		  
 	  );
 	}
@@ -144,5 +178,22 @@ render() {
 
 export default function(elementId, returnUrl) {
 		ReactDOM.render(<AiApiConversation returnUrl={returnUrl} instanceId={elementId}/>, document.getElementById(elementId));
+}
+
+class BarChartComponent extends React.Component
+{
+   constructor(props) {
+      super(props);
+      this.state ={
+       }
+  }
+   render()
+   {
+      return(
+         <div>
+            <Bar/>
+         </div>
+      )
+   }
 }
 
