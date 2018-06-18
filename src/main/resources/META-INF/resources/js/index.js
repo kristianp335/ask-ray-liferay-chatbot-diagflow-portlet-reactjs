@@ -11,38 +11,7 @@ class AiApiConversation extends React.Component {
 		this.recordVoice = this.recordVoice.bind(this);
 		this.getLink = this.getLink.bind(this);
 		this.renderButton = this.renderButton.bind(this);
-		this.getApiAiData(); 
-		let conversationType = ["Query", "Response"];
-		let conversationValue = [];
-		let conversationValueQuery = 0;
-		let conversationValueResponse = 0;
-		
-		this.state.apiAiDataObject.forEach(element => {
-			if (element.type = "query") {
-				conversationValueQuery = converationValueQuery + 1;
-			
-			}
-			else
-			{
-				conversationValueResponse = conversationValueResponse + 1;
-			}
-		});
-		this.setState({ 
-			Data: {
-			labels: conversationType,
-			datasets:[
-				{
-					label:'Query vs Response Count',
-					data: conversationValue ,
-					backgroundColor:[
-					'rgba(255,105,145,0.6)',
-					'rgba(155,100,210,0.6)'                      
-				]
-				}
-			]
-			}
-		});
-         
+		this.getApiAiData(); 		
 	}
   
   getApiAiData() {
@@ -56,7 +25,36 @@ class AiApiConversation extends React.Component {
 			  var myObject = this.state.apiAiDataObject;
 			  obj.map(someObjects => (myObject.push(someObjects)));			
 			  this.setState(apiAiDataObject = myObject);
-			  console.log(this.state.apiAiDataObject);	  
+			  console.log(this.state.apiAiDataObject);
+			  let conversationType = ["Query", "Response"];
+				let conversationValueQuery = 0;
+				let conversationValueResponse = 0;
+				
+				this.state.apiAiDataObject.forEach(element => {
+					if (element.type == "query") {
+						conversationValueQuery = conversationValueQuery + 1;
+					
+					}
+					else
+					{
+						conversationValueResponse = conversationValueResponse + 1;
+					}
+				});
+				this.setState({ 
+					Data: {
+					labels: conversationType,
+					datasets:[
+						{
+							label:'Query vs Response Count',
+							data: [conversationValueQuery, conversationValueResponse] ,
+							backgroundColor:[
+							'rgba(255,105,145,0.6)',
+							'rgba(155,100,210,0.6)'                      
+						]
+						}
+					]
+					}
+				});	  
 			  }.bind(this)
 	  );
   }
@@ -169,8 +167,8 @@ render() {
 										
 				</p>
 			</div>
-			<BarChartComponent data={this.state.Data}
-          options={{maintainAspectRatio: false}}/>
+			<Bar data={this.state.Data}
+          options={{maintainAspectRatio: true}}/>
 		</div>		  
 	  );
 	}
@@ -179,21 +177,3 @@ render() {
 export default function(elementId, returnUrl) {
 		ReactDOM.render(<AiApiConversation returnUrl={returnUrl} instanceId={elementId}/>, document.getElementById(elementId));
 }
-
-class BarChartComponent extends React.Component
-{
-   constructor(props) {
-      super(props);
-      this.state ={
-       }
-  }
-   render()
-   {
-      return(
-         <div>
-            <Bar/>
-         </div>
-      )
-   }
-}
-
