@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Bar} from 'react-chartjs-2';
-import { defaults } from 'react-chartjs-2';
+import {Pie} from 'react-chartjs-2';
+import mixpanel from 'mixpanel-browser';
+
 
 class AiApiConversation extends React.Component {
 	constructor(props) {
@@ -12,52 +14,52 @@ class AiApiConversation extends React.Component {
 		this.recordVoice = this.recordVoice.bind(this);
 		this.getLink = this.getLink.bind(this);
 		this.renderButton = this.renderButton.bind(this);
-		this.getApiAiData(); 
-		let conversationType = ["Query", "Response"];
-		let conversationValue = [];
-		let conversationValueQuery = 0;
-		let conversationValueResponse = 0;
-		
-		this.state.apiAiDataObject.forEach(element => {
-			if (element.type = "query") {
-				conversationValueQuery = converationValueQuery + 1;
-			
-			}
-			else
-			{
-				conversationValueResponse = conversationValueResponse + 1;
-			}
-		});
-		this.setState({ 
-			Data: {
-			labels: conversationType,
-			datasets:[
-				{
-					label:'Query vs Response Count',
-					data: conversationValue ,
-					backgroundColor:[
-					'rgba(255,105,145,0.6)',
-					'rgba(155,100,210,0.6)'                      
-				]
-				}
-			]
-			}
-		});
-         
+		mixpanel.init("622023206e7bfc25c718b6282fb07903");
+		this.getApiAiData(); 		
 	}
   
   getApiAiData() {
 	  Liferay.Service(
 		  '/apiai.apiaidata/get-recent-conversation',
 		  {
-			  records: 6
+			  records: 60
 		  },
 		  function(obj) {
 			  console.log(obj);
 			  var myObject = this.state.apiAiDataObject;
+			  myObject.splice(0, 60);
 			  obj.map(someObjects => (myObject.push(someObjects)));			
 			  this.setState(apiAiDataObject = myObject);
-			  console.log(this.state.apiAiDataObject);	  
+			  console.log(this.state.apiAiDataObject);
+			  let conversationType = ["Query", "Response"];
+				let conversationValueQuery = 0;
+				let conversationValueResponse = 0;
+				
+				this.state.apiAiDataObject.forEach(element => {
+					if (element.type == "query") {
+						conversationValueQuery = conversationValueQuery + 1;
+					
+					}
+					else
+					{
+						conversationValueResponse = conversationValueResponse + 1;
+					}
+				});
+				this.setState({ 
+					Data: {
+					labels: conversationType,
+					datasets:[
+						{
+							label:'Query vs Response Count',
+							data: [conversationValueQuery, conversationValueResponse] ,
+							backgroundColor:[
+							'rgba(255,105,145,0.6)',
+							'rgba(155,100,210,0.6)'                      
+						]
+						}
+					]
+					}
+				});	  
 			  }.bind(this)
 	  );
   }
@@ -97,6 +99,11 @@ class AiApiConversation extends React.Component {
 		data: apiAiRequestString,
 		beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer 4304414ee84640ef8267ea82c383d6e9');},
 		success: function(data) {
+			mixpanel.identify(themeDisplay.getUserId());
+			mixpanel.people.set({ "Plan": "Premium", "$email": "kristian.patefield@googlemail.com", "$last_login": new Date(), 
+			"$first_name": "Kris", "$last_name": "Patefield"
+		 	});			
+			mixpanel.track("Ask Ray Query", {"query": data.result.resolvedQuery, "speech": data.result.fulfillment.messages["0"].speech,  "action": data.result.action });
 			console.log(data);
 			Liferay.Service(
 				'/apiai.apiaidata/add-api-ai-data-persistence',
@@ -171,7 +178,9 @@ render() {
 				</p>
 			</div>
 			<Bar data={this.state.Data}
-          options={{maintainAspectRatio: false}}/>
+          options={{maintainAspectRatio: true}}/>
+		  	<Pie data={this.state.Data}
+          options={{maintainAspectRatio: true}}/>
 		</div>		  
 	  );
 	}
@@ -180,5 +189,3 @@ render() {
 export default function(elementId, returnUrl) {
 		ReactDOM.render(<AiApiConversation returnUrl={returnUrl} instanceId={elementId}/>, document.getElementById(elementId));
 }
-
-

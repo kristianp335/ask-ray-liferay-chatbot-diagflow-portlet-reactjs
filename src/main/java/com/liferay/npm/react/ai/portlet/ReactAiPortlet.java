@@ -22,9 +22,11 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.name=" + ReactAiPortletKeys.ReactAi,
 		"javax.portlet.resource-bundle=content.Language",
+		"com.liferay.fragment.entry.processor.portlet.alias=react-to-ray",
 		"javax.portlet.security-role-ref=power-user,user"
 	},
 	service = Portlet.class
 )
 public class ReactAiPortlet extends MVCPortlet {
+	
 }

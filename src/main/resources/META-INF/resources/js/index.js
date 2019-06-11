@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Bar} from 'react-chartjs-2';
+import {Pie} from 'react-chartjs-2';
+import mixpanel from 'mixpanel-browser';
+
 
 class AiApiConversation extends React.Component {
 	constructor(props) {
@@ -11,6 +14,7 @@ class AiApiConversation extends React.Component {
 		this.recordVoice = this.recordVoice.bind(this);
 		this.getLink = this.getLink.bind(this);
 		this.renderButton = this.renderButton.bind(this);
+		mixpanel.init("622023206e7bfc25c718b6282fb07903");
 		this.getApiAiData(); 		
 	}
   
@@ -18,11 +22,12 @@ class AiApiConversation extends React.Component {
 	  Liferay.Service(
 		  '/apiai.apiaidata/get-recent-conversation',
 		  {
-			  records: 6
+			  records: 60
 		  },
 		  function(obj) {
 			  console.log(obj);
 			  var myObject = this.state.apiAiDataObject;
+			  myObject.splice(0, 60);
 			  obj.map(someObjects => (myObject.push(someObjects)));			
 			  this.setState(apiAiDataObject = myObject);
 			  console.log(this.state.apiAiDataObject);
@@ -94,6 +99,11 @@ class AiApiConversation extends React.Component {
 		data: apiAiRequestString,
 		beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer 4304414ee84640ef8267ea82c383d6e9');},
 		success: function(data) {
+			mixpanel.identify(themeDisplay.getUserId());
+			mixpanel.people.set({ "Plan": "Premium", "$email": "kristian.patefield@googlemail.com", "$last_login": new Date(), 
+			"$first_name": "Kris", "$last_name": "Patefield"
+		 	});			
+			mixpanel.track("Ask Ray Query", {"query": data.result.resolvedQuery, "speech": data.result.fulfillment.messages["0"].speech,  "action": data.result.action });
 			console.log(data);
 			Liferay.Service(
 				'/apiai.apiaidata/add-api-ai-data-persistence',
@@ -168,6 +178,8 @@ render() {
 				</p>
 			</div>
 			<Bar data={this.state.Data}
+          options={{maintainAspectRatio: true}}/>
+		  	<Pie data={this.state.Data}
           options={{maintainAspectRatio: true}}/>
 		</div>		  
 	  );
