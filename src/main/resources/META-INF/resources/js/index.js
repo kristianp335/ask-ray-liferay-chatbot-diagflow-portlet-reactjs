@@ -148,7 +148,7 @@ getLink(action) {
 
 renderButton() {
 	if(this.state.link != "") {
-		return <a className="btn btn-primary" href={this.state.link}>Open</a>
+		return <a className="btn btn-primary button-custom" href={this.state.link} >Open</a>
 	}
 	else {
 		return <p></p>
@@ -173,7 +173,7 @@ render() {
 			<div>
 				<p>
 					<br/>					
-					<button className="btn icon-microphone btn-default" onClick={this.recordVoice}  name="micbutton" type="text"/>
+					<button className="btn icon btn-primary" onClick={this.recordVoice}  name="micbutton" type="text" value="Speak">Speak</button>
 										
 				</p>
 			</div>
