@@ -158,7 +158,7 @@ renderButton() {
 
 render() {
 	  return (
-		<div>
+		<div>		
 			<form onSubmit={this.handleSubmit}>
 				<div>
 					{this.state.apiAiDataObject.map(apiAiDataObjects => (

@@ -1,23 +1,24 @@
 {
 	"dependencies": {
-		"react": "15.6.2",
-		"react-dom": "15.6.2",
+		"react": "16.8.6",
+		"react-dom": "16.8.6",
 		"chart.js": "2.7.2",
 		"react-chartjs-2": "2.1.0",
 		"mixpanel-browser": "2.22.4"
 	},
 	"devDependencies": {
+		"liferay-npm-bundler": "^2.17.0",
+		"liferay-npm-build-support": "^2.17.0",
 		"babel-cli": "6.26.0",
-		"babel-preset-es2015": "6.24.1",
-		"babel-preset-liferay-project": "1.6.1",
+		"babel-preset-env": "1.7.0",
 		"babel-preset-react": "6.24.1",
-		"liferay-npm-bundler": "1.6.1",
-		"liferay-npm-bundler-preset-react": "1.6.1"
+		"babel-preset-es2015": "6.24.1",
+		"babel-loader": "7.1.5"
 	},
 	"main": "js/index.js",
 	"name": "react-apiai",
 	"scripts": {
-		"build": "babel --source-maps -d build/resources/main/META-INF/resources src/main/resources/META-INF/resources && liferay-npm-bundler"
+		"build": "babel --source-maps -d build/resources/main/META-INF/resources/js src/main/resources/META-INF/resources/js && liferay-npm-bundler"
 	},
 	"version": "1.0.0"
 }
