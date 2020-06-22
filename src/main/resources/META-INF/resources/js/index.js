@@ -1,8 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import {Bar} from 'react-chartjs-2';
 import {Pie} from 'react-chartjs-2';
 import mixpanel from 'mixpanel-browser';
+
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+
+import GqlApp from './components/GqlApp.js';
 
 
 class AiApiConversation extends React.Component {
@@ -16,7 +22,7 @@ class AiApiConversation extends React.Component {
 		this.renderButton = this.renderButton.bind(this);
 		mixpanel.init("622023206e7bfc25c718b6282fb07903");
 		this.getApiAiData(); 		
-	}
+  }
   
   getApiAiData() {
 	  Liferay.Service(
@@ -157,8 +163,17 @@ renderButton() {
 }
 
 render() {
+	  const endpoint = Liferay.ThemeDisplay.getPortalURL() + '/o/graphql?p_auth=' + Liferay.authToken
+	  const client = new ApolloClient({ uri : endpoint });	
+	  
+	  
 	  return (
-		<div>		
+		<div data-analytics-asset-type="custom"
+			  data-analytics-asset-id="Ask Ray React"
+			  data-analytics-asset-category="ask-ray-form"
+			  data-analytics-asset-title="Ask Ray Form">
+		
+		
 			<form onSubmit={this.handleSubmit}>
 				<div>
 					{this.state.apiAiDataObject.map(apiAiDataObjects => (
@@ -168,15 +183,15 @@ render() {
 					<this.renderButton/>	
 					<div><input className="field form-control" onChange={this.handleChange} name="ai-query" type="text" value={this.state.value}/>
 					</div>
+					<br/>
+					<div><button className="btn icon btn-primary" value="submit" name="go" type="submit">Go</button>&nbsp;<button className="btn icon btn-primary" onClick={this.recordVoice}  name="micbutton" type="text" value="Speak">Speak</button>
+					</div>
+					<br/>
 				</div>
 			</form>
-			<div>
-				<p>
-					<br/>					
-					<button className="btn icon btn-primary" onClick={this.recordVoice}  name="micbutton" type="text" value="Speak">Speak</button>
-										
-				</p>
-			</div>
+			<ApolloProvider client={client}>
+		    	<GqlApp />
+		    </ApolloProvider>
 			<Bar data={this.state.Data}
           options={{maintainAspectRatio: true}}/>
 		  	<Pie data={this.state.Data}
@@ -189,3 +204,5 @@ render() {
 export default function(elementId, returnUrl) {
 		ReactDOM.render(<AiApiConversation returnUrl={returnUrl} instanceId={elementId}/>, document.getElementById(elementId));
 }
+
+

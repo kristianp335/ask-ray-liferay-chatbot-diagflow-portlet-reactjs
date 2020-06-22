@@ -34,7 +34,6 @@ public class ReturnUrlMVCResourceCommand implements MVCResourceCommand {
 	public boolean serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 			throws PortletException {
 		String thisAction = resourceRequest.getParameter("action");
-		System.out.println("this is getting called");
 		ThemeDisplay themeDisplay = (ThemeDisplay) resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		String returnUrl = "";
 		
@@ -45,7 +44,6 @@ public class ReturnUrlMVCResourceCommand implements MVCResourceCommand {
 				plid = PortalUtil.getPlidFromPortletId(themeDisplay.getScopeGroupId(), false, "com_liferay_blogs_web_portlet_BlogsPortlet");
 				LiferayPortletURL portletUrl = PortletURLFactoryUtil.create(resourceRequest,"com_liferay_blogs_web_portlet_BlogsPortlet" , plid, PortletRequest.RENDER_PHASE);
 				returnUrl = portletUrl.toString();
-				System.out.print(returnUrl);
 			} catch (PortalException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -58,7 +56,6 @@ public class ReturnUrlMVCResourceCommand implements MVCResourceCommand {
 			LiferayPortletURL androidPortletUrl = PortletURLFactoryUtil.create(resourceRequest,"com_liferay_blogs_web_portlet_BlogsPortlet" , androidPlid, PortletRequest.RENDER_PHASE);
 			androidPortletUrl.setParameter("categoryId", "63160");	
 			returnUrl = androidPortletUrl.toString();
-			System.out.print(returnUrl);			
 		}
 		try {
 			PrintWriter writer = resourceResponse.getWriter();
