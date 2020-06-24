@@ -20,3 +20,5 @@ The standard common or garden Liferay MVC with JQuery version of this Portlet is
 
 [Liferay MVC Portlet version of Ask Ray](https://github.com/kristianp335/ask-ray-liferay-chatbot-diagflow-portlet)
 
+**(todo - Add promises support, render more with Clay components, refactor code for better state handling with GraphQL)**
+
