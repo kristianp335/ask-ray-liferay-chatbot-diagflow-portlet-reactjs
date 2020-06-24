@@ -6,6 +6,8 @@ This NPM Portlet has just been upgraded to use Bundler 2, which is best practice
 
 **The chatbot has recently been changed to also grab some content from Liferay via Liferay's GraphQL API. The module utilises Apollo-Boost and Apollo's React wrapper. There is an additional React Component providing this capability in the build.**
 
+Import the content with the provided lar in the root of the module.
+
 **Thanks to Ivan for his amazing Liferay Bundler work**
 
 [Liferay NPM Bundler](https://www.npmjs.com/package/liferay-npm-bundler)
