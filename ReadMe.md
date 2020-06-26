@@ -4,7 +4,7 @@ This is a chatbot integrated to DialogFlow Google's NLP engine. There are three 
 
 This NPM Portlet has just been upgraded to use Bundler 2, which is best practice when building JS AMD NPM modules in Liferay.
 
-**The chatbot has recently been changed to also grab some content from Liferay via Liferay's GraphQL API. The module utilises Apollo-Boost and Apollo's React wrapper. There is an additional React Component providing this capability in the build.**
+**The chatbot has recently been changed to also grab some content from Liferay via Liferay's GraphQL API. The module utilises Apollo-Boost and Apollo's React wrapper. There is an additional React Component providing this capability in the build which renders content in a Clay React Card component.**
 
 Import the content with the provided lar in the root of the module.
 
@@ -20,5 +20,5 @@ The standard common or garden Liferay MVC with JQuery version of this Portlet is
 
 [Liferay MVC Portlet version of Ask Ray](https://github.com/kristianp335/ask-ray-liferay-chatbot-diagflow-portlet)
 
-**(todo - Add promises support, render more with Clay components, refactor code for better state handling with GraphQL)**
+**(todo - Add promises support and refactor code for better state handling with GraphQL)**
 

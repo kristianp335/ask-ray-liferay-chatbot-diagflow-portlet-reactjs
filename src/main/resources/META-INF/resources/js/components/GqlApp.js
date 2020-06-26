@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
 
+import ClayCard from '@clayui/card';
+
 class GqlApp extends React.Component {
 	constructor(props) {
 		super(props);
@@ -79,22 +81,23 @@ query {
 	    	  	return (
 	    	  			<div>
 		    	  			<h4>Through the power of GraphQL Ray thinks you might like this...</h4>
-		    	  			<div className="component-card text-left p-2">
-		    	  				<div className="card shadow-sm m-0" style={{borderRadius: "0.1875rem"}}>
-			    	  				<div>
-			    	  					<img className="img img-responsive" src={Liferay.ThemeDisplay.getPortalURL() + imageLocation}></img>
-			    	  				</div>
-			    	  				<div className="card-body py-4">
-				    	  				<h2>
-				    	  					<div>{articleTitle}</div>
-				    	  				</h2>
-			
-				    	  				<div className="mb-4" >
-				    	  					<p>{articleContent}</p>
-				    	  				</div>
-				    	  			</div>
-				    	  		</div>
-				    	  	</div>
+		    	  			
+							<ClayCard>
+								<div>
+									<img className="img img-responsive" src={Liferay.ThemeDisplay.getPortalURL() + imageLocation}></img>
+								</div>	
+								<ClayCard.Body>
+									<br/>
+									<ClayCard.Description displayType="title">
+										{articleTitle}
+									</ClayCard.Description>
+									<br/>
+									<ClayCard.Description truncate={false} displayType="text">
+										{articleContent}
+									</ClayCard.Description>
+								</ClayCard.Body>
+							</ClayCard>
+		    	  			
 				    	  	<br/>
 				    	  	<br/>
 			    	  	</div>
