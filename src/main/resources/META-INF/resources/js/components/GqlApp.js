@@ -14,7 +14,7 @@ class GqlApp extends React.Component {
 	render() {
 	const MY_QUERY = gql`
 query { 
-    structuredContents(flatten: true, page: 1, pageSize: 10, filter: "contains(title,'Mundane')") {
+    structuredContents(flatten: true, page: 1, pageSize: 10, filter: "contains(title,'Mundane')", siteKey: "DXP Insurance Retail") {
        totalCount
     items {
       title
@@ -23,27 +23,53 @@ query {
       }
       contentFields {
         dataType
-        name
-        value {
+        name 
+        contentFieldValue {
           data
           document {
+            actions
+            contentType
             contentUrl
+            contentValue
             description
             encodingFormat
             fileExtension
             id
             sizeInBytes
             title
-          }          
+            graphQLNode {
+              id
+            }
+          }
+          geo {
+            latitude
+            longitude
+          }
           image {
+            actions
+            contentType
             contentUrl
+            contentValue
             description
             encodingFormat
             fileExtension
             id
+            sizeInBytes
             title
+            graphQLNode {
+              id
+            }
           }
-        }
+          link
+          structuredContentLink {
+            contentType
+            id
+            title
+            graphQLNode {
+              id
+            }
+          }
+        } 
       }
     } 
   	}
@@ -63,13 +89,13 @@ query {
 	    	  	
 	    	  	for (var i = 0; i < contentFields.length; i++) {
 	    	  	  if (contentFields[i].name == "ArticleImage") {
-	    	  		  imageLocation = contentFields[i].value.image.contentUrl;
+	    	  		  imageLocation = contentFields[i].contentFieldValue.image.contentUrl;
 	    	  	  }
 	    	  	  if (contentFields[i].name == "ArticleTitle") {
-	    	  		  articleTitle = contentFields[i].value.data;
+	    	  		  articleTitle = contentFields[i].contentFieldValue.data;
 	    	  	  }
 	    	  	  if (contentFields[i].name == "ArticleContent") {
-	    	  		  articleContent = contentFields[i].value.data;
+	    	  		  articleContent = contentFields[i].contentFieldValue.data;
 	    	  	  }
 	    	  	}
 	    	  	
