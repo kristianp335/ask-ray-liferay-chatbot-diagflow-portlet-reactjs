@@ -8,6 +8,22 @@ This NPM Portlet has just been upgraded to use Bundler 2, which is best practice
 
 Import the content with the provided lar in the root of the module.
 
+The chatbot now uses the V2 version of Google's Dialogflow API which requires OAuth2.0 service account authentication. You must deploy
+the **org.apache.servicemix.bundles.gae-1.9.81_1.jar** to Liferay to satisfy this modules dependencies. All other dependencies are satisfied by Liferay
+default or as compileInclude.
+
+Because the module uses Google Service account authentication you need to add your json service account file e.g liferay-onhm-1c5c15d292d4.json to /src/main/resources.
+
+You can find out how you create the service account by reading this documentation for Dialogflow [Dialogflow quickstart guide] (https://cloud.google.com/dialogflow/docs/quick/setup)
+
+Make sure you edit the "dialogflowUrl" variable in index.js with the project id of your Agent.
+
+Documentation on how to setup a DialogFlow Agent can be found here [DialogFlow Documentation] (https://cloud.google.com/dialogflow/docs/basics)
+
+You need to make sure you have an intent setup in DialogFlow called "blog" and you set an action called "blog". Create a page in Liferay and add the blogs widget to it. Then trigger the intent with your training phrase.
+
+The actions are triggered by the Portlet's resource phase controller.
+
 **Thanks to Ivan for his amazing Liferay Bundler work**
 
 [Liferay NPM Bundler](https://www.npmjs.com/package/liferay-npm-bundler)
