@@ -30,7 +30,7 @@ The actions are triggered by the Portlet's resource phase controller.
 
 There is a Liferay Service and API which is required as a dependency. This service just records the chat history in Liferay. You need to build and deploy the service, api and chatbot module.
 
-[Ask Ray Service Builder project](https://github.com/kristianp335/ask-ray-liferay-chatbot-diagflow-service)
+[Ask Ray DialogFlow V2 Service Builder project](https://github.com/kristianp335/ask-ray-liferay-chatbot-dialogflowv2-service)
 
 The standard common or garden Liferay MVC with JQuery version of this Portlet is here.
 
