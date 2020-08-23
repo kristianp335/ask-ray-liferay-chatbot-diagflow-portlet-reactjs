@@ -2,7 +2,7 @@
 
 This is a chatbot integrated to DialogFlow Google's NLP engine. There are three versions of the chatbot both in my GitHub. This one is an NPM Portlet with React and ChartJS dependencies. You can have a conversation with it and it will draw a simple graph using ChartJS below. Ask it "How can I create a blog" by either typing or literally speaking to it. You will need to setup your own DialogFlow chatbot Agent.
 
-Note this module is all about how you use NPM Portlets, how you might integrate with DialogFlow in Liferay and how you might want to authenticate with Google OAuth2.0. I think of loads of ways 
+Note this module is all about how you use NPM Portlets, how you might integrate with DialogFlow in Liferay and how you might want to authenticate with Google OAuth2.0. I can think of loads of ways 
 I might make this module and other modules in this family better, but this is not the point. The code comes with no warranty or support from myself or Liferay. It is a bunch of examples not production code.
 
 This NPM Portlet has just been upgraded to use Bundler 2, which is best practice when building JS AMD NPM modules in Liferay.
