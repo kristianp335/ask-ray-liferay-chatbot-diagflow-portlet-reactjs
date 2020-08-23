@@ -14,6 +14,10 @@ default or as compileInclude.
 
 Because the module uses Google Service account authentication you need to add your json service account file e.g liferay-onhm-1c5c15d292d4.json to /src/main/resources.
 
+The module is a really good example of how you can do server side OAuth2.0 Google API authentication and then pass the accessToken to be used as a bearer token in the client side. Take a 
+look at the main Portlet class to see how I am doing that. The API calls happen client side but the OAuth2.0 authentication and authorisation happens server side. I have not put a huge amount of thought into managing what happens when the accessToken expires, I just get a new one everytime the Portlet loads 
+you might want to think about this if you decide to run with this in production.
+
 You can find out how you create the service account by reading this documentation for Dialogflow [Dialogflow quickstart guide] (https://cloud.google.com/dialogflow/docs/quick/setup)
 
 Make sure you edit the "dialogflowUrl" variable in index.js with the project id of your Agent.
