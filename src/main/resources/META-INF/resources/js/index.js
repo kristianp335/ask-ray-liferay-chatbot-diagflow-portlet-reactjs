@@ -20,8 +20,7 @@ class AiApiConversation extends React.Component {
 		this.recordVoice = this.recordVoice.bind(this);
 		this.getLink = this.getLink.bind(this);
 		this.renderButton = this.renderButton.bind(this);
-		mixpanel.init("622023206e7bfc25c718b6282fb07903");
-		this.getApiAiData(); 		
+		this.getApiAiData(); 	
   }
   
   getApiAiData() {
@@ -92,34 +91,35 @@ class AiApiConversation extends React.Component {
   }
 
   handleSubmit(event) {
-	this.setState({link: ""});
-	let apiAiRequest = ({ query: this.state.value,
-	lang: "en",    	
-	sessionId: "12345"
-	});
+	this.setState({link: ""});	
+	let apiAiRequest = ({
+		  "query_input": {
+			    "text": {
+			      "text": this.state.value,
+			      "language_code": "en-US"
+			    }
+			  }
+			});
 	let apiAiRequestString = JSON.stringify(apiAiRequest);
+	let dialogflowUrl = "https://dialogflow.googleapis.com/v2/projects/liferay-onhm/agent/sessions/" + this.props.conversationSession +":detectIntent";
+	let dialogflowAccessToken = this.props.accessToken;
 	$.ajax({
-		url: "https://api.api.ai/v1/query?v=20150910",
+		url: dialogflowUrl,
 		type: "POST",
 		contentType: "application/json",
 		data: apiAiRequestString,
-		beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer 4304414ee84640ef8267ea82c383d6e9');},
+		beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + dialogflowAccessToken);},
 		success: function(data) {
-			mixpanel.identify(themeDisplay.getUserId());
-			mixpanel.people.set({ "Plan": "Premium", "$email": "kristian.patefield@googlemail.com", "$last_login": new Date(), 
-			"$first_name": "Kris", "$last_name": "Patefield"
-		 	});			
-			mixpanel.track("Ask Ray Query", {"query": data.result.resolvedQuery, "speech": data.result.fulfillment.messages["0"].speech,  "action": data.result.action });
 			console.log(data);
 			Liferay.Service(
 				'/apiai.apiaidata/add-api-ai-data-persistence',
 				{
-					query: data.result.resolvedQuery, 
+					query: data.queryResult.queryText, 
 					authtoken: "4304414ee84640ef8267ea82c383d6e9", 
-					speech: data.result.fulfillment.messages["0"].speech, 
-					action: data.result.action, 
-					fulfillment: data.result.fulfillment, 
-					result: data.result
+					speech: data.queryResult.fulfillmentMessages["0"].text.text["0"], 
+					action: data.queryResult.action, 
+					fulfillment: data.queryResult.action, 
+					result: data.queryResult.action
 				},
 				function(obj) {
 					this.getApiAiData();					
@@ -127,12 +127,12 @@ class AiApiConversation extends React.Component {
 						{
 							let synth = window.speechSynthesis;
 							let msg = new SpeechSynthesisUtterance();
-							msg.text = data.result.fulfillment.messages["0"].speech;
+							msg.text = data.queryResult.fulfillmentMessages["0"].text.text["0"];
 							synth.speak(msg);
 						}
 					this.setState({isItVoice : false});
 					this.setState({value: ""});
-					this.getLink(data.result.action);
+					this.getLink(data.queryResult.action);
 					}.bind(this)
 			)
 		
@@ -201,8 +201,8 @@ render() {
 	}
 }
 
-export default function(elementId, returnUrl) {
-		ReactDOM.render(<AiApiConversation returnUrl={returnUrl} instanceId={elementId}/>, document.getElementById(elementId));
+export default function(elementId, returnUrl, accessToken, conversationSession) {
+		ReactDOM.render(<AiApiConversation returnUrl={returnUrl} instanceId={elementId} conversationSession={conversationSession} accessToken={accessToken} />, document.getElementById(elementId));
 }
 
 

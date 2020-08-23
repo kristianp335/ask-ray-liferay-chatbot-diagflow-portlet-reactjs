@@ -1,10 +1,21 @@
 package com.liferay.npm.react.ai.portlet;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.liferay.npm.react.ai.constants.ReactAiPortletKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import javax.portlet.Portlet;
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -27,6 +38,27 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = Portlet.class
 )
-public class ReactAiPortlet extends MVCPortlet {
+
+
+public class ReactAiPortlet extends MVCPortlet { 
+	public void doView(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+				throws IOException, PortletException {
+	
+	String accessToken =  null;
+	ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+	InputStream stream = classloader.getResourceAsStream("liferay-onhm-1c5c15d292d4.json");
+	List<String> scopes = Arrays.asList("https://www.googleapis.com/auth/cloud-platform", "https://www.googleapis.com/auth/dialogflow"); 
+	GoogleCredential credentials = GoogleCredential.fromStream(stream).createScoped(scopes);
+	credentials.refreshToken();
+	accessToken = credentials.getAccessToken();
+	System.out.println("Access token for dialog flow is " + accessToken);
+	String conversationSession = renderRequest.getPortletSession().getId();
+	renderRequest.setAttribute("accessToken", accessToken);
+	renderRequest.setAttribute("conversationSession", conversationSession);
+	
+	super.doView(renderRequest, renderResponse);
+	
+	}
 	
 }

@@ -2,4 +2,5 @@ Bundle-Name: react-apiai
 Bundle-SymbolicName: com.liferay.npm.react.ai
 Bundle-Version: 1.0.0
 Export-Package: com.liferay.npm.react.ai.constants
+Import-Package: !org.apache.log*, *
 Web-ContextPath: /react-apiai
