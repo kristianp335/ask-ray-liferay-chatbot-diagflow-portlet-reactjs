@@ -5,12 +5,21 @@ This is a chatbot integrated to DialogFlow Google's NLP engine. There are three 
 Note this module is all about how you use NPM Portlets, how you might integrate with DialogFlow in Liferay and how you might want to authenticate with Google OAuth2.0. I can think of loads of ways 
 I might make this module and other modules in this family better, but this is not the point. The code comes with no warranty or support from myself or Liferay. It is a bunch of examples not production code.
 
+## Liferay NPM Bundler
+
 This NPM Portlet has just been upgraded to use Bundler 2, which is best practice when building JS AMD NPM modules in Liferay.
 
+**Thanks to Ivan for his amazing Liferay Bundler work**
+
+[Liferay NPM Bundler](https://www.npmjs.com/package/liferay-npm-bundler)
+
+## GraphQL
 
 **The chatbot has recently been changed to also grab some content from Liferay via Liferay's GraphQL API. The module utilises Apollo-Boost and Apollo's React wrapper. There is an additional React Component providing this capability in the build which renders content in a Clay React Card component.**
 
 Import the content with the provided lar in the root of the module.
+
+## DialogFlow and Google OAuth2.0 service account authentication
 
 The chatbot now uses the V2 version of Google's Dialogflow API which requires OAuth2.0 service account authentication. You must deploy
 the **org.apache.servicemix.bundles.gae-1.9.81_1.jar** to Liferay to satisfy this modules dependencies. All other dependencies are satisfied by Liferay
@@ -32,13 +41,13 @@ You need to make sure you have an intent setup in DialogFlow called "blog" and y
 
 The actions are triggered by the Portlet's resource phase controller.
 
-**Thanks to Ivan for his amazing Liferay Bundler work**
-
-[Liferay NPM Bundler](https://www.npmjs.com/package/liferay-npm-bundler)
+## Service dependency
 
 There is a Liferay Service and API which is required as a dependency. This service just records the chat history in Liferay. You need to build and deploy the service, api and chatbot module.
 
 [Ask Ray DialogFlow V2 Service Builder project](https://github.com/kristianp335/ask-ray-liferay-chatbot-dialogflowv2-service)
+
+## Other information
 
 The standard common or garden Liferay MVC with JQuery version of this Portlet is here.
 
