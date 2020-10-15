@@ -31,11 +31,7 @@ class AiApiConversation extends React.Component {
 		  },
 		  function(obj) {
 			  console.log(obj);
-			  var myObject = this.state.apiAiDataObject;
-			  myObject.splice(0, 60);
-			  obj.map(someObjects => (myObject.push(someObjects)));			
-			  this.setState(apiAiDataObject = myObject);
-			  console.log(this.state.apiAiDataObject);
+			  this.setState({apiAiDataObject: obj});
 			  let conversationType = ["Query", "Response"];
 				let conversationValueQuery = 0;
 				let conversationValueResponse = 0;
