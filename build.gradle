@@ -1,10 +1,14 @@
 dependencies {
+	/*
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib"
 	compileOnly group: "javax.portlet", name: "portlet-api"
 	compileOnly group: "javax.servlet", name: "javax.servlet-api"
 	compileOnly group: "jstl", name: "jstl"
 	compileOnly group: "org.osgi", name: "osgi.cmpn"
+	 */
+	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.3.5-ga6"
+
 	compileInclude group: 'com.google.api-client', name: 'google-api-client', version: '1.30.10'
 	compileInclude group: 'com.google.http-client', name: 'google-http-client', version: '1.36.0'
 	compileInclude group: 'com.google.http-client', name: 'google-http-client-jackson2', version: '1.36.0'
@@ -14,4 +18,12 @@ dependencies {
 	compileInclude group: 'io.grpc', name: 'grpc-context', version: '1.0.1'
 	compileInclude group: 'org.apache.avalon.framework', name: 'avalon-framework-impl', version: '4.3.1'
 	compileInclude group: 'commons-logging', name: 'commons-logging', version: '1.2'
+}
+
+task('docker.deploy', type: Copy) {
+	group "custom"
+	dependsOn 'jar'
+	from "$buildDir/libs"
+	include "*.jar"
+	into "${custom_liferay_jar_deploy_dir}"
 }
