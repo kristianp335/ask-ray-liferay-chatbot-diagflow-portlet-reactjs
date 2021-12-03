@@ -107,6 +107,7 @@ class AiApiConversation extends React.Component {
 		beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + dialogflowAccessToken);},
 		success: function(data) {
 			console.log(data);
+			Analytics.track("Ask Ray Chatbot", { intent: data.queryResult.intent.displayName, action: data.queryResult.action, query: data.queryResult.queryText });
 			Liferay.Service(
 				'/apiai.apiaidata/add-api-ai-data-persistence',
 				{
@@ -185,9 +186,6 @@ render() {
 					<br/>
 				</div>
 			</form>
-			<ApolloProvider client={client}>
-		    	<GqlApp />
-		    </ApolloProvider>
 			<Bar data={this.state.Data}
           options={{maintainAspectRatio: true}}/>
 		  	<Pie data={this.state.Data}

@@ -47,7 +47,7 @@ public class ReactAiPortlet extends MVCPortlet {
 	
 	String accessToken =  null;
 	ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-	InputStream stream = classloader.getResourceAsStream("liferay-onhm-1c5c15d292d4.json");
+	InputStream stream = classloader.getResourceAsStream("liferay-onhm-e29a44679275.json");
 	List<String> scopes = Arrays.asList("https://www.googleapis.com/auth/cloud-platform", "https://www.googleapis.com/auth/dialogflow"); 
 	GoogleCredential credentials = GoogleCredential.fromStream(stream).createScoped(scopes);
 	credentials.refreshToken();
