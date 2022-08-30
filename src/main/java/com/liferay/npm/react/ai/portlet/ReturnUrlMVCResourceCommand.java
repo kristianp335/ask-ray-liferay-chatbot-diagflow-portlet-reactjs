@@ -43,7 +43,10 @@ public class ReturnUrlMVCResourceCommand implements MVCResourceCommand {
 			try {
 				plid = PortalUtil.getPlidFromPortletId(themeDisplay.getScopeGroupId(), false, "com_liferay_blogs_web_portlet_BlogsPortlet");
 				LiferayPortletURL portletUrl = PortletURLFactoryUtil.create(resourceRequest,"com_liferay_blogs_web_portlet_BlogsPortlet" , plid, PortletRequest.RENDER_PHASE);
-				returnUrl = portletUrl.toString();
+				//Broken need to fix this
+				//returnUrl = portletUrl.toString();
+				returnUrl = "/web/dxp-insurance-retail/blogs";
+
 			} catch (PortalException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
