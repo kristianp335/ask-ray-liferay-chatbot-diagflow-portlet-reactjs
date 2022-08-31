@@ -5,6 +5,10 @@ This is a chatbot integrated to DialogFlow Google's NLP engine. There are three 
 Note this module is all about how you use NPM Portlets, how you might integrate with DialogFlow in Liferay and how you might want to authenticate with Google OAuth2.0. I can think of loads of ways 
 I might make this module and other modules in this family better, but this is not the point. The code comes with no warranty or support from myself or Liferay. It is a bunch of examples not production code.
 
+### Liferay Version Dependency
+
+These extensions have been tested with 7.4 U33
+
 ## Liferay NPM Bundler
 
 This NPM Portlet has just been upgraded to use Bundler 2, which is best practice when building JS AMD NPM modules in Liferay.
