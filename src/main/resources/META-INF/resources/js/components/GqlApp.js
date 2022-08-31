@@ -11,10 +11,16 @@ class GqlApp extends React.Component {
 		super(props);
 	}
 	
+	
+	
+	
+	
+	
+	
 	render() {
 	const MY_QUERY = gql`
 query { 
-    structuredContents(flatten: true, page: 1, pageSize: 10, filter: "contains(title,'Mundane')", siteKey: "DXP Insurance Retail") {
+    structuredContents(flatten: true, page: 1, pageSize: 10, filter: "contains(title,'Grab')", siteKey: "Liferaybotics") {
        totalCount
     items {
       title
@@ -88,13 +94,13 @@ query {
 	    	  	var articleTitle = "";
 	    	  	
 	    	  	for (var i = 0; i < contentFields.length; i++) {
-	    	  	  if (contentFields[i].name == "ArticleImage") {
+	    	  	  if (contentFields[i].name == "Photo") {
 	    	  		  imageLocation = contentFields[i].contentFieldValue.image.contentUrl;
 	    	  	  }
-	    	  	  if (contentFields[i].name == "ArticleTitle") {
+	    	  	  if (contentFields[i].name == "Title") {
 	    	  		  articleTitle = contentFields[i].contentFieldValue.data;
 	    	  	  }
-	    	  	  if (contentFields[i].name == "ArticleContent") {
+	    	  	  if (contentFields[i].name == "Header") {
 	    	  		  articleContent = contentFields[i].contentFieldValue.data;
 	    	  	  }
 	    	  	}
@@ -102,7 +108,12 @@ query {
 	    	  //Hack to remove HTML
 	    	  	
 	    	  	articleContent = articleContent.replace("<p>", "");
-	    	  	articleContent = articleContent.replace("</p>", "");	
+	    	  	articleContent = articleContent.replace("</p>", "");
+	    	  	articleContent = articleContent.replace("<ul>", "");
+	    	  	articleContent = articleContent.replace("</ul>", "");
+	    	  	articleContent = articleContent.replace("<li>", "");
+	    	  	articleContent = articleContent.replace("</li>", "");
+	    	  	articleContent = articleContent.substring(0,120);
 	    	  	console.log("The image URL is " + imageLocation);
 	    	  	return (
 	    	  			<div>
@@ -119,7 +130,7 @@ query {
 									</ClayCard.Description>
 									<br/>
 									<ClayCard.Description truncate={false} displayType="text">
-										{articleContent}
+										{articleContent}...
 									</ClayCard.Description>
 								</ClayCard.Body>
 							</ClayCard>

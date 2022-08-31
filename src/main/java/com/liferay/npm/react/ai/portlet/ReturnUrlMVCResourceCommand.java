@@ -10,7 +10,7 @@ import javax.portlet.ResourceResponse;
 
 import org.osgi.service.component.annotations.Component;
 
-import com.liferay.npm.react.ai.constants.ReactAiPortletKeys;
+import com.liferay.npm.react.ai.constants.ReactAiConstants;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 @Component(
 	    immediate = true,
 	    property = {
-	    	"javax.portlet.name=" + ReactAiPortletKeys.ReactAi,
+	    	"javax.portlet.name=" + ReactAiConstants.REACT_AI_PORTLET_NAME,
 	        "mvc.command.name=/returnUrl"
 	    },
 	    service = MVCResourceCommand.class

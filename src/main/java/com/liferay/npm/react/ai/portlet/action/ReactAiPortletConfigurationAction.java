@@ -1,6 +1,6 @@
 package com.liferay.npm.react.ai.portlet.action;
 
-import com.liferay.npm.react.ai.constants.ReactAiPortletKeys;
+import com.liferay.npm.react.ai.constants.ReactAiConstants;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import org.osgi.service.component.annotations.Component;
@@ -12,7 +12,7 @@ import javax.portlet.PortletConfig;
 @Component(
         immediate = true,
         property = {
-                "javax.portlet.name=" + ReactAiPortletKeys.ReactAi
+                "javax.portlet.name=" + ReactAiConstants.REACT_AI_PORTLET_NAME
         },
         service = ConfigurationAction.class
 )
