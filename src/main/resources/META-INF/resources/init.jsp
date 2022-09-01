@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.npm.react.ai.portlet.configuration.ReactAiPortletConfiguration" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -8,13 +7,9 @@
 taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib prefix="clay" uri="http://liferay.com/tld/clay" %>
 
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
 
-<%
-    ReactAiPortletConfiguration portletInstanceConfiguration = portletDisplay.getPortletInstanceConfiguration(ReactAiPortletConfiguration.class);
-    String json = portletInstanceConfiguration.json();
-    pageContext.setAttribute("json",json);
-%>

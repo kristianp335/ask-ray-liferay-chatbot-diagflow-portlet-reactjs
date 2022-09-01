@@ -1,22 +1,10 @@
 dependencies {
 
-	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.4-ga33"
+	compileOnly group: "org.slf4j", name: "slf4j-api"
 
-	compileInclude group: 'com.google.api-client', name: 'google-api-client', version: '1.30.10'
-	compileInclude group: 'com.google.http-client', name: 'google-http-client', version: '1.36.0'
-	compileInclude group: 'com.google.http-client', name: 'google-http-client-jackson2', version: '1.36.0'
-	compileInclude group: 'com.google.http-client', name: 'google-http-client-gson', version: '1.36.0'
-	compileInclude group: 'com.google.oauth-client', name: 'google-oauth-client', version: '1.31.0'
-	compileInclude group: 'com.google.guava', name: 'guava', version: '29.0-jre'
-	compileInclude group: 'io.grpc', name: 'grpc-context', version: '1.0.1'
+	compileInclude group: 'com.google.http-client', name: 'google-http-client', version: '1.41.3'
+	compileInclude group: 'com.google.http-client', name: 'google-http-client-gson', version: '1.41.3'
+	compileInclude group: 'com.google.auth', name: 'google-auth-library-oauth2-http', version: '1.5.3'
 	compileInclude group: 'org.apache.avalon.framework', name: 'avalon-framework-impl', version: '4.3.1'
-	compileInclude group: 'commons-logging', name: 'commons-logging', version: '1.2'
-}
-
-task('docker.deploy', type: Copy) {
-	group "custom"
-	dependsOn 'jar'
-	from "$buildDir/libs"
-	include "*.jar"
-	into "${custom_liferay_jar_deploy_dir}"
 }

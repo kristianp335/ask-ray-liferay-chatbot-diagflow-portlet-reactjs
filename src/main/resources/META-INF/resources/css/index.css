@@ -1,19 +1,27 @@
 .conversation-query {
-	background-color: #868e96; 
+	background-color: #868e96;
+	background-color: var(--upper-header-background, #868e96);
 	color: #fff; 
 	border-radius: 10px; 
-	max-width: 250px; padding: 10px; 
-	border: solid 1px #212529; 
+	max-width: 250px; padding: 10px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #212529;
+	border-color: var(--upper-header-background, #212529);
 	margin-bottom: 10px; 
 	margin-left: 15px;
 }
 
 .conversation-response {
-	background-color: #e95959; 
+	background-color: #e95959;
+	background-color: var(--primary, #e95959);
 	color: #fff; 
 	border-radius: 10px; 
-	max-width: 250px; padding: 10px; 
-	border: solid 1px #d05050; 
+	max-width: 250px; padding: 10px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #d05050;
+	border-color: var(--primary, #d05050);
 	margin-bottom: 10px; 
 	margin-left: 25px;
 }
@@ -21,3 +29,27 @@
 .button-custom {
 	margin-bottom: 20px;
 }
+
+.ray-container {
+	position: fixed; 
+	right: 200px; 
+	bottom: 20px; 
+	background: #fff;
+	max-width:450px;	
+	height: 700px;
+    z-index: 9000000; 
+    padding: 40px;  
+    border-radius: 10px; 
+    border: solid lightgrey;
+    display: none;   
+    overflow: auto; 
+}
+
+.ray-button {	
+	position: fixed !important; 
+	bottom: 50px; 
+	right: 45px;
+}
+
+
+

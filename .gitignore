@@ -4,3 +4,4 @@ node_modules/
 target/
 /src/main/resources/demoagent-n9lk-87cbc19a8f79.json
 /package-lock.json
+.DS_Store

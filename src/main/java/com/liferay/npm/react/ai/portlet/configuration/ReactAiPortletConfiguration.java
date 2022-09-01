@@ -4,13 +4,33 @@ import aQute.bnd.annotation.metatype.Meta;
 import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
 
 @ExtendedObjectClassDefinition(
-        category = "liferay-custom",
-        scope = ExtendedObjectClassDefinition.Scope.PORTLET_INSTANCE
+        category = "askray",
+        scope = ExtendedObjectClassDefinition.Scope.GROUP
 )
 @Meta.OCD(
-        id = "com.liferay.npm.react.ai.portlet.configuration.ReactAiPortletConfiguration"
+        id = ReactAiPortletConfiguration.PID,
+        localization = "content/Language",
+        name = "config-react-ai-name",
+        description = "config-react-ai-description"
 )
 public interface ReactAiPortletConfiguration {
-    @Meta.AD(deflt = "", required = false)
-    String json();
+    String PID = "com.liferay.npm.react.ai.portlet.configuration.ReactAiPortletConfiguration";
+
+    @Meta.AD(deflt = "apiai.apiaidata",
+            description = "config-service-context-path-description",
+            name = "config-service-context-path-name",
+            required = false)
+    String serviceContextPath();
+
+    @Meta.AD(deflt = "",
+            description = "config-dialogflow-project-identifier-description",
+            name = "config-dialogflow-project-identifier-name",
+            required = false)
+    String dialogflowProjectId();
+
+    @Meta.AD(deflt = "",
+            description = "config-service-account-json-description",
+            name = "config-service-account-json-name",
+            required = false)
+    String serviceAccountJson();
 }
