@@ -1,5 +1,6 @@
 package com.liferay.npm.react.ai.constants;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,6 +14,6 @@ public class ReactAiConstants {
     public static final String SERVICE_CONTEXT_PATH_REQUEST_ATTRIBUTE = "serviceContextPath";
     public static final String DIALOGFLOW_PROJECT_ID_REQUEST_ATTRIBUTE = "dialogflowProjectId";
     public static final String SERVICE_ACCOUNT_JSON_PROJECT_ID = "project_id";
-    public static final List<String> SCOPES = List.of(
-			"https://www.googleapis.com/auth/cloud-platform", "https://www.googleapis.com/auth/dialogflow");
+    public static final List<String> SCOPES = Arrays.asList(
+            "https://www.googleapis.com/auth/cloud-platform", "https://www.googleapis.com/auth/dialogflow");
 }
