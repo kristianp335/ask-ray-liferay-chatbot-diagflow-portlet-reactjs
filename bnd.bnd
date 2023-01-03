@@ -1,6 +1,6 @@
 Bundle-Name: Liferay Sales Engineering Ask Ray React
 Bundle-SymbolicName: com.liferay.npm.react.ai
-Bundle-Version: 2.0.1
+Bundle-Version: 3.0.0
 Export-Package: com.liferay.npm.react.ai.constants
 Import-Package: !org.apache.log*, !com.google.appengine*, !com.google.apphosting*, *
 Web-ContextPath: /react-apiai
